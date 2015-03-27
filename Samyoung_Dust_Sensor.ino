@@ -75,14 +75,15 @@ void setup()
 void loop()
 {
   duration = pulseIn(pin, LOW);
-  lowpulseoccupancy = lowpulseoccupancy+duration;
+  lowpulseoccupancy = lowpulseoccupancy + duration;
   
   RTC.timeStamp();    // get date and time from RTC
   if(RTC.second==0)  // check if seconds are 0 - this will log data every minute
   {
     printParticle(); // print particle data to SD card
   }
-  delay(100);
+  
+  delay(10);
 }
 
 // calcualte and print particle measurement data ****************************************************************
@@ -124,6 +125,7 @@ void printParticle()
     digitalWrite(LED, LOW);
     
     lowpulseoccupancy = 0; // reset lowpulse occupancy for next measurement
+    delay(1000); // put sufficient delay so that second is no longer 0
   }
 }
 
