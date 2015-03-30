@@ -3,7 +3,7 @@
 // OSBSS PM2.5 datalogger code - for Dust sensor DSM501A
 // Based on code by Christopher Nafis interface to Shinyei Model PPD42NS Particle Sensor (April 2012)
 
-// Last edited on March 26, 2015
+// Last edited on March 30, 2015
 
 //****************************************************************
 
@@ -48,7 +48,7 @@ void setup()
   digitalWrite(POWA, HIGH);    // turn on SD card
   delay(1);    // give some delay to ensure SD card is turned on properly
 
-  if(!sd.init(SPI_FULL_SPEED, SDcsPin))  // initialize SD card on the SPI bus
+  if(!sd.begin(SDcsPin, SPI_FULL_SPEED))  // initialize SD card on the SPI bus
   {
     delay(10);
     SDcardError();
@@ -89,7 +89,7 @@ void loop()
 // calcualte and print particle measurement data ****************************************************************
 void printParticle()
 {
-  if(!sd.init(SPI_FULL_SPEED, SDcsPin))    // very important - reinitialize SD card on the SPI bus
+  if(!sd.begin(SDcsPin, SPI_FULL_SPEED))    // very important - reinitialize SD card on the SPI bus
   {
     delay(10);
     SDcardError();
@@ -129,7 +129,7 @@ void printParticle()
   }
 }
 
-// file timestamps
+// file timestamps ****************************************************************
 void PrintFileTimeStamp() // Print timestamps to data file. Format: year, month, day, hour, min, sec
 { 
   file.timestamp(T_WRITE, RTC.year, RTC.month, RTC.day, RTC.hour, RTC.minute, RTC.second);    // edit date modified
