@@ -3,7 +3,7 @@
 // OSBSS PM2.5 datalogger code - for Dust sensor DSM501A
 // Based on code by Christopher Nafis interface to Shinyei Model PPD42NS Particle Sensor (April 2012)
 
-// Last edited on March 30, 2015
+// Last edited on April 14, 2015
 
 //****************************************************************
 
@@ -13,8 +13,6 @@
 #include <SdFat.h>
 
 // Launch Variables   ******************************
-long interval = 60;  // set logging interval in SECONDS, eg: set 300 seconds for an interval of 5 mins
-int dayStart = 24, hourStart = 20, minStart = 0;    // define logger start time: day of the month, hour, minute
 char filename[15] = "log.csv";    // Set filename Format: "12345678.123". Cannot be more than 8 characters in length, contain spaces or begin with a number
 
 // Global objects and variables   ******************************
@@ -29,7 +27,7 @@ int SDcsPin = 9; // pin 9 is CS pin for MicroSD breakout
 int pin = 6; // data from dust sensor
 unsigned long duration;
 unsigned long starttime;
-unsigned long sampletime_ms = 60000;
+unsigned long sampletime_ms = 60000;  // set sample time in milliseconds. Leave this at 60,000 for current version of code
 unsigned long lowpulseoccupancy = 0;
 float ratio = 0;
 float concentration = 0;
