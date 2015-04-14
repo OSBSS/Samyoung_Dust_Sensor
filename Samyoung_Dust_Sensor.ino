@@ -27,7 +27,7 @@ int SDcsPin = 9; // pin 9 is CS pin for MicroSD breakout
 int pin = 6; // data from dust sensor
 unsigned long duration;
 unsigned long starttime;
-unsigned long sampletime_ms = 60000;  // set sample time in milliseconds. Leave this at 60,000 for current version of code
+unsigned long sampletime_ms = 30000;  // set sample time in milliseconds. Leave this at 30,000 for current version of code
 unsigned long lowpulseoccupancy = 0;
 float ratio = 0;
 float concentration = 0;
@@ -76,7 +76,7 @@ void loop()
   lowpulseoccupancy = lowpulseoccupancy + duration;
   
   RTC.timeStamp();    // get date and time from RTC
-  if(RTC.second==0)  // check if seconds are 0 - this will log data every minute
+  if(RTC.second==0 || RTC.second==30)  // check if seconds are 0 or 30 - this will log data every 30 seconds
   {
     printParticle(); // print particle data to SD card
   }
@@ -102,7 +102,7 @@ void printParticle()
     
     // calculate particle data
     ratio = lowpulseoccupancy/(sampletime_ms*10.0);  // Integer percentage 0=>100
-    concentration = 1.1*pow(ratio,3)-3.8*pow(ratio,2)+520*ratio+0.62; // using spec sheet curve
+    concentration = 1.1*pow(ratio,3)-3.8*pow(ratio,2)+520*ratio+0.62; // using Samyoung DSM501A spec sheet curve
     particle = 0.2899*pow(ratio,4)-13.787*pow(ratio,3)+224.57*pow(ratio,2)-825.71*ratio+3032.0;
     
     file.print(time);
