@@ -102,7 +102,7 @@ void printParticle()
     
     // calculate particle data
     ratio = lowpulseoccupancy/(sampletime_ms*10.0);  // Integer percentage 0=>100
-    concentration = 1.1*pow(ratio,3)-3.8*pow(ratio,2)+520*ratio+0.62; // using Samyoung DSM501A spec sheet curve
+    concentration = 1.1*pow(ratio,3)-3.8*pow(ratio,2)+520*ratio+0.62;
     particle = 0.2899*pow(ratio,4)-13.787*pow(ratio,3)+224.57*pow(ratio,2)-825.71*ratio+3032.0;
     
     file.print(time);
