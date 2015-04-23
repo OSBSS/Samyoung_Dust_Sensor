@@ -102,8 +102,9 @@ void printParticle()
     
     // calculate particle data
     ratio = lowpulseoccupancy/(sampletime_ms*10.0);  // Integer percentage 0=>100
-    concentration =  4.794*pow(ratio,4) - 14.654*pow(ratio,3) + 12.725*pow(ratio,2) + 5.9801*ratio + 0.4996;  // Equations based on Samyoung DSM501A spec sheet
-    particle = -9*pow(10,-16)*pow(ratio,4) + 3*pow(10, -11)*pow(ratio,3) - 3*pow(10,-7)*pow(ratio,2) + 0.0027*ratio - 1.4606;
+    concentration =  (0.0026 * pow(ratio, 2)) + (0.0859 * ratio) - 0.0184; //   // Equations based on Samyoung DSM501A spec sheet
+    particle = (0.2069 * pow(ratio, 4)) - (9.7081 * pow(ratio, 3)) + (156.86 * pow(ratio, 2)) - (389.72 * ratio) + 2169.9;
+
     file.print(time);
     file.print(",");
     file.print(lowpulseoccupancy);
@@ -112,7 +113,7 @@ void printParticle()
     file.print(",");
     file.print(concentration);
     file.print(",");
-    file.print(particle/283.0);
+    file.print(particle*3.534); // 1000/283 ml - convert particles/283ml to particles/liter (or partciles/cm3)
     file.println();
     PrintFileTimeStamp();
     file.close();    // close file - very important
