@@ -3,7 +3,7 @@
 // OSBSS PM2.5 datalogger code - for Dust sensor DSM501A
 // Based on code by Christopher Nafis interface to Shinyei Model PPD42NS Particle Sensor (April 2012)
 
-// Last edited on April 14, 2015
+// Last edited on April 23, 2015
 
 //****************************************************************
 
