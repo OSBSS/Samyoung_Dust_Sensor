@@ -46,7 +46,7 @@ void setup()
   digitalWrite(POWA, HIGH);    // turn on SD card
   delay(1);    // give some delay to ensure SD card is turned on properly
 
-  if(!sd.begin(SDcsPin, SPI_FULL_SPEED))  // initialize SD card on the SPI bus
+  if(!sd.init(SPI_FULL_SPEED, SDcsPin))  // initialize SD card on the SPI bus
   {
     delay(10);
     SDcardError();
@@ -87,7 +87,7 @@ void loop()
 // calcualte and print particle measurement data ****************************************************************
 void printParticle()
 {
-  if(!sd.begin(SDcsPin, SPI_FULL_SPEED))    // very important - reinitialize SD card on the SPI bus
+  if(!sd.init(SPI_FULL_SPEED, SDcsPin))    // very important - reinitialize SD card on the SPI bus
   {
     delay(10);
     SDcardError();
